@@ -10,7 +10,7 @@
 #Установка библиотек
 Для работы бота необходимо установить следующие зависимости:
 
-* **telebot**: `pip install pyTelegramBotAPI`
+* **telebot**: `pip install telebot`
 * **tiktok_downloader**: `pip install tiktok_downloader`
 
 #Настройка бота
