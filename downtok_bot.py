@@ -1,7 +1,8 @@
+import os
 import telebot
 from tiktok_downloader import ttdownloader
 
-bot_token = 'PASTE_YOUR_API_HERE'  # Замените на свой токен бота
+bot_token = 'YOUR_API_KEY'  # Замените на свой токен бота
 
 bot = telebot.TeleBot(bot_token)
 
@@ -14,12 +15,14 @@ def download_video(message):
     video_url = message.text
     if 'tiktok.com' in video_url:
         try:
+            bot.reply_to(message, 'Ваше видео получено, ожидайте!')
             d = ttdownloader(video_url)
             d[0].download('video.mp4')
             with open('video.mp4', 'rb') as file:
                 bot.send_chat_action(message.chat.id, 'upload_video')
                 bot.send_video(message.chat.id, file)
             bot.reply_to(message, 'Видео успешно скачано и отправлено!')
+            os.remove('video.mp4')
         except Exception as e:
             bot.reply_to(message, 'Произошла ошибка при скачивании видео.')
             print(e)
